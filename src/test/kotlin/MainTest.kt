@@ -6,7 +6,7 @@ import java.io.PrintStream
 class MainTest {
     @Test
     fun testMain() {
-        val result: List<String>
+        var result: List<String>
         val outputStream = ByteArrayOutputStream()
         val printStream = PrintStream(outputStream)
         System.setOut(printStream)
@@ -18,5 +18,15 @@ class MainTest {
         assertEquals("", result[1])
         assertEquals("", result[2])
         assertEquals("An unexpected error occurred!", result[3])
+
+        outputStream.reset()
+
+        main(arrayOf(1.toString()))
+        result = outputStream.toString().lines()
+
+        assertEquals("Hello Advent of Code 2023!", result[0])
+        assertEquals("", result[1])
+        assertEquals("", result[2])
+        assertEquals("Result:", result[3])
     }
 }
